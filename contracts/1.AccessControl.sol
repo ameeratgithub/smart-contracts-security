@@ -26,16 +26,21 @@ contract SecureAgreedPrice {
     uint256 public price;
     address public owner;
 
+    modifier onlyOwner() {
+        require(owner == msg.sender, "You're not authorized");
+        _;
+    }
+
     constructor(uint256 _price) {
         price = _price;
         owner = msg.sender;
     }
 
-    /*
-     * @notice vulnerable function because anyone can change price, which make it useless
-     */
-    function updatePrice(uint256 _price) external {
-        require(owner==msg.sender,"You're not authorized");
+    function changeOwner(address _owner) external onlyOwner {
+        owner = _owner;
+    }
+
+    function updatePrice(uint256 _price) external onlyOwner{
         price = _price;
     }
 }
