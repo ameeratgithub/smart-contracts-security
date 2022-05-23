@@ -39,23 +39,9 @@ describe("Access Control", function () {
       expect((await secureAgreedPrice.price()).toString()).to.eq('1000')
     })
     it('should not change the value when attacker attacks', async () => {
-      await expect(secureAgreedPrice.connect(attacker).updatePrice(1000)).to.be.rejectedWith(`You're not authorized`)
+      await expect(secureAgreedPrice.connect(attacker).updatePrice(1000)).to.be.rejectedWith(`Ownable: caller is not the owner`)
       expect((await vulnerableAgreedPrice.price()).toString()).to.not.eq('1000')
     })
-
-    it('should be possible for the owner to change ownership', async () => {
-      await secureAgreedPrice.changeOwner(newOwner.address)
-      expect(await secureAgreedPrice.owner()).to.eq(newOwner.address)
-    })
-    it('should change value when new owner changes', async () => {
-      await secureAgreedPrice.changeOwner(newOwner.address)
-      await secureAgreedPrice.connect(newOwner).updatePrice(1000)
-      expect((await secureAgreedPrice.price()).toString()).to.eq('1000')
-    })
-    it('should change value when owner changes', async () => {
-      await expect(secureAgreedPrice.connect(attacker).changeOwner(attacker.address))
-        .to.be.rejectedWith(`You're not authorized`)
-      expect(await secureAgreedPrice.owner()).to.eq(deployer.address)
-    })
+    
   })
 });
