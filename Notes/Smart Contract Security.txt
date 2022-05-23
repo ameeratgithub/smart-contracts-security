@@ -1,0 +1,11 @@
+Ethereum is
+
+a. Neutral (Doesn't detect good or bad actors)
+b. Public (Anyone can submit a transaction )
+c. Immutable code (Code changes are not possible (upgradability is a workaround))
+d. New and evolving technology (Security risks are there)
+e. Real money (needed to handle carefully)
+
+
+An attack can do state changes in one transaction or multiple transactions. Transaction made for this purpose are known as exploits
+If vulnerable contract is not accessible in direct manner, user can use custom smart contract to attack the vulnerable contract. This can involve a lot of intermediate smart contracts.
