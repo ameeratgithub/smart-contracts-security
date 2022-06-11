@@ -36,6 +36,7 @@ contract SecureToken {
     mapping(address => uint256) public balanceOf;
     uint256 public totalSupply;
     address public owner;
+    
     constructor(uint256 _initialSupply) public {
         totalSupply = _initialSupply;
         balanceOf[msg.sender] = _initialSupply;
