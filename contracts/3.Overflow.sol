@@ -50,12 +50,12 @@ contract SecureToken {
             we don't have to substract amount, avoiding overflow.
          */
         require(balanceOf[msg.sender] >= _amount, "Not enough tokens");
-        balanceOf[msg.sender] -= _amount;
-        balanceOf[_to] += _amount;
+        balanceOf[msg.sender] -= _amount;  // Use sub method of SafeMath, while using SafeMath library 
+        balanceOf[_to] += _amount; // Use add method of SafeMath, while using SafeMath library
     }
 
     function mint(uint256 _amount) external {
-        totalSupply += _amount;
-        balanceOf[owner] += _amount;
+        totalSupply += _amount; // Use add method of SafeMath, while using SafeMath library
+        balanceOf[owner] += _amount; // Use add method of SafeMath, while using SafeMath library
     }
 }
