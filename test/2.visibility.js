@@ -3,7 +3,11 @@ const { ethers } = require("hardhat");
 
 describe("Visibility of private state variable", function () {
     let deployer, attacker, vault
-
+    
+    /**
+     * @desc - Deploys Vault, get Signers provided by hardhat and deposit ETH into Vault
+     * @dev - Convert string to bytes and pass to Vault constructor
+     */
     beforeEach(async () => {
         [deployer, attacker] = await ethers.getSigners()
 
@@ -13,7 +17,12 @@ describe("Visibility of private state variable", function () {
         await vault.deposit({ value: ethers.utils.parseEther('100') })
 
     })
-
+    
+    /**
+     * @desc - Reads and pass private variable in a transaction to withdraw
+     * @dev - getStorageAt() is used to read value from a given slot
+     * 
+     */
     it("should be able to read private variable", async () => {
         let initialBalanceContract = await ethers.provider.getBalance(vault.address)
         let initialBalanceAttacker = await ethers.provider.getBalance(attacker.address)
